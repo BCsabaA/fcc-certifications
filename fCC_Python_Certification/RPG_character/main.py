@@ -1,0 +1,56 @@
+# app
+
+full_dot = '●'
+empty_dot = '○'
+
+def create_character(name, strength, intelligence, charisma):
+
+    if not isinstance(name, str):
+        return 'The character name should be a string'
+    if name == '':
+        return 'The character should have a name'
+    if len(name) > 10:
+        return 'The character name is too long'
+    if ' ' in name:
+        return 'The character name should not contain spaces'
+
+    if (not isinstance(strength, int) or
+        not isinstance(intelligence, int) or
+        not isinstance(charisma, int)):
+        return 'All stats should be integers'
+    if (strength < 1 or
+        intelligence < 1 or
+        charisma < 1):
+        return 'All stats should be no less than 1'
+    if (strength > 4 or
+        intelligence > 4 or
+        charisma > 4):
+        return 'All stats should be no more than 4'
+    if (strength + intelligence + charisma != 7):
+        return 'The character should start with 7 points'
+
+    def stat_to_str_line(stat_name, stat_value):
+        stat_str = stat_name + ' '
+        for i in range(10):
+            if i+1 <= stat_value:
+                stat_str += full_dot
+            else:
+                stat_str += empty_dot
+        return stat_str
+
+    character = (name + '\n' +
+                 stat_to_str_line('STR', strength) + '\n' +
+                 stat_to_str_line('INT', intelligence) + '\n' +
+                 stat_to_str_line('CHA', charisma))
+
+    return character
+
+
+def main():
+    # name = input('name: ')
+    print(create_character('dolphin', 1, 2, 4))
+          
+
+
+if __name__ == '__main__':
+    main()
