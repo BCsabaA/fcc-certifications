@@ -52,27 +52,56 @@ def matrix_data_of_coord(matrix: list[list], coord: tuple) -> dict:
             rotate_matrix[n-j-1][i] = matrix[i][j]
 
     rotate_coord = (coord_y, n-coord_x-1)
-    diagonal2_sum = matrix_diagonal1_of_coord(rotate_matrix, rotate_coord)
+    diagonal2_sum = matrix_diagonal1_of_coord(
+        rotate_matrix,
+        rotate_coord)
 
     return {
         'line_sum': line_sum ,
         'column_sum': column_sum,
         'diagona1_sum': diagonal1_sum,
         'diagona2_sum': diagonal2_sum,
-        'total': line_sum + column_sum + diagonal1_sum + diagonal2_sum
+        'total': line_sum +
+        column_sum + diagonal1_sum + diagonal2_sum
     }
 
-n = 2
-
-adj_matrix = [[0] * n] * n
-print(adj_matrix)
-
+def print_matrix(matrix):
+    for line in matrix:
+        print(line)
 
 
-for x in range(len(adj_matrix)):
-    for y in range(len(adj_matrix)):
-        coord = (x, y)
-        print(coord)
-        print(matrix_data_of_coord(adj_matrix, coord))
+def dfs_n_queens(n):
+    if n == 1:
+        return
+    adj_matrix = []
+    for i in range(n):
+        adj_matrix.append([0] * n)
+    solutions = []
+    solution = []
+    for y in range(n):
+        for x in range(n):
+            print_matrix(adj_matrix)
+            print(solution)
+            if matrix_data_of_coord(
+                    adj_matrix, (x, y))['total'] == 0:
+                solution.append(y)
+                adj_matrix[x][y] = 1
+                break
+    return solution
+
+n = 4
+
+print(dfs_n_queens(n))
+
+#print(adj_matrix)
+
+# matrix = [[1, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
+
+# print_matrix(matrix)
+
+# for x in range(len(adj_matrix)):
+#     for y in range(len(adj_matrix)):
+#         coord = (x, y)
+#         print(coord, matrix_data_of_coord(matrix, coord)['total'])
 
 # print(matrix_data_of_coord, coord)
