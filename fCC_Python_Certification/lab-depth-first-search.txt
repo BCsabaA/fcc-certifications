@@ -1,0 +1,48 @@
+** start of main.py **
+
+def dfs(adj_matrix, node_label):
+    reachable_nodes = [node_label]
+    stack=[]
+    for i in range(len(adj_matrix)):
+        if adj_matrix[node_label][i] == 1:
+            reachable_nodes.append(i)
+            stack.append(i)
+    while stack:
+        next_node = stack.pop(-1)
+       
+        for i in range(len(adj_matrix[0])):
+            if adj_matrix[next_node][i] == 1:
+                if i not in reachable_nodes:
+                    reachable_nodes.append(i)
+                    stack.append(i)
+    print(reachable_nodes)
+    return reachable_nodes
+                
+
+dfs([
+    [0, 1, 0, 0], 
+    [1, 0, 1, 0], 
+    [0, 1, 0, 1], 
+    [0, 0, 1, 0]], 1)
+dfs([
+    [0, 1, 0, 0], 
+    [1, 0, 1, 0], 
+    [0, 1, 0, 1], 
+    [0, 0, 1, 0]], 3)
+
+dfs([
+    [0, 1, 0, 0], 
+    [1, 0, 1, 0], 
+    [0, 1, 0, 0], 
+    [0, 0, 0, 0]], 3)
+
+dfs([
+    [0, 1, 0, 0], 
+    [1, 0, 0, 0], 
+    [0, 0, 0, 1], 
+    [0, 0, 1, 0]], 3)
+
+dfs([[0, 1, 0, 0], [1, 0, 0, 0], [0, 0, 0, 1], [0, 0, 1, 0]], 0)
+
+** end of main.py **
+
